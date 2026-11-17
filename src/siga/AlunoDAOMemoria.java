@@ -21,8 +21,8 @@ import java.util.List;
  * inserir() não impede matrícula duplicada.
  *
  * Tarefa:
- *   - Etapa 1: completar as quatro operações do CRUD;
- *   - Etapa 3: corrigir a coleção exposta e a exclusão silenciosa.
+ * - Etapa 1: completar as quatro operações do CRUD;
+ * - Etapa 3: corrigir a coleção exposta e a exclusão silenciosa.
  */
 public class AlunoDAOMemoria implements AlunoDAO {
 
@@ -30,7 +30,10 @@ public class AlunoDAOMemoria implements AlunoDAO {
 
     @Override
     public void inserir(Aluno aluno) {
-        // TODO (etapa 1): impedir matrícula duplicada, lançando IllegalStateException.
+        if (buscarPorMatricula(aluno.getMatricula()) != null) {
+            throw new IllegalStateException(
+                    "Já existe aluno com a matrícula " + aluno.getMatricula());
+        }
         armazem.add(aluno);
     }
 
@@ -41,7 +44,7 @@ public class AlunoDAOMemoria implements AlunoDAO {
                 return aluno;
             }
         }
-        return null;   // não encontrado
+        return null; // não encontrado
     }
 
     @Override
@@ -52,15 +55,20 @@ public class AlunoDAOMemoria implements AlunoDAO {
 
     @Override
     public void atualizar(Aluno aluno) {
-        // TODO (etapa 1): localizar o aluno pela matrícula e substituí-lo,
-        // lançando exceção caso não exista.
-        throw new UnsupportedOperationException("Operação ainda não implementada.");
+        for (int i = 0; i < armazem.size(); i++) {
+            if (armazem.get(i).getMatricula().equals(aluno.getMatricula())) {
+                armazem.set(i, aluno); // substitui na mesma posição
+                return;
+            }
+        }
+        throw new IllegalStateException(
+                "Aluno não encontrado: " + aluno.getMatricula());
     }
 
     @Override
     public void remover(String matricula) {
         // DESLIZE 2: não verifica se existia; falha em silêncio.
         Aluno encontrado = buscarPorMatricula(matricula);
-        armazem.remove(encontrado);   // remove(null) simplesmente não faz nada
+        armazem.remove(encontrado); // remove(null) simplesmente não faz nada
     }
 }
