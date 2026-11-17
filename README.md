@@ -51,3 +51,7 @@ Ao final: (a) as **quatro operações** do CRUD funcionam; (b) a regra da média
 Conforme a ficha de atividade prática: identificadores em português, um arquivo `.java` por classe pública, código formatado, entrega no repositório Git com README e commits descritivos. O uso de IA para gerar o código é proibido nesta atividade (ver seção 5.3 da ficha).
 
 > **Etapa 1 do Projeto Integrador:** além desta atividade, a entrega inclui o modelo de domínio, o diagrama de classes, ao menos um padrão criacional justificado e a documentação das decisões de design. Consulte a Seção 10 da apostila da Aula 8.
+
+
+Etapa 5:
+Para a Etapa 1, segui o roteiro da Aula 8 fazendo um commit para cada passo, comecei montando o CRUD em memória e a camada de serviço, e depois já corrigi aquelas três falhas (coleção exposta, exclusão silenciosa e validação duplicada)e por fim arrumei as mensagens de erro na tela e documentei tudo no README.
